@@ -2,6 +2,12 @@
 
 `JRocket` is an event-driven Java Socket library. Execute events in Server and Clients and send data payloads with it. You can use it in Android too.
 
+## Features
+
+* **Event-driven. Send events with data payloads between server and client**
+* **Asynchronous.**
+* **Heartbeat mechanism. Server and client will be able to detect if one of them is disconnected**
+
 ## Download
 
 Download JRocket.jar from <a href="https://github.com/frhnfrq/JRocket/releases/download/v1.0/JRocket.jar">here.</a>
@@ -14,15 +20,17 @@ Use the `JRocketServer.listen(int port, int coreThreadPoolSize)` method to start
 Here, `coreThreadPoolSize` refers to the core size of the underlying thread pool. This library lets you handle the size of the thread pool. You can change the thread pool size in runtime by calling
 `setCoreThreadPoolSize(int coreThreadPoolSize)` method.
 Note that, you must call `setMaxThreadPoolSize(int maxThreadPoolSize)` after calling `listen(int port, int coreThreadPoolSize)` if you want to change the 
-core thread pool size. See the example section for more.
+core thread pool size.
+Start listening for events by calling `onReceive(String event, OnReceiveListener onReceiveListener)` method, and send events to clients by calling `send(String event, JSONObject data)` on `Client` objects.
 
-Start listening for events by calling `onReceive(String event,OnReceiveListener onReceiveListener)` method, and send events to clients by calling `send(String event, JSONObject data)` on `Client` objects.
+See the example section for more.
 
 ### Client
 
 Use the `JRocketClient.prepare(String host, int port, RocketClientListener rocketClientListener)` to prepare the client. It'll return a `JRocketClient` object. Then call `connect()` method to connect to the server.
-Start listening for events by calling `onReceive(String event,OnReceiveListener onReceiveListener)` method, and send events to server by calling `send(String event, JSONObject data)` on `JRocketClient` object.
+Start listening for events by calling `onReceive(String event, OnReceiveListener onReceiveListener)` method, and send events to server by calling `send(String event, JSONObject data)` on `JRocketClient` object.
 
+See the example section for more.
 
 #### Example (Server)
 
